@@ -1,0 +1,169 @@
+{
+    "name": "chatii/fuelphp_setup",
+    "type": "metapackage",
+    "description": "FuelPHP Installer (not Oil)",
+    "keywords": ["framework"],
+    "homepage": "http://chatii.net",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chatii",
+            "email": "contact@chatii.net"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/chatii/fuelphp_setup",
+        "email": "contact@chatii.net"
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "monolog/monolog": "1.5.*",
+        "fuelphp/upload": "2.0.1",
+        "fuel/core": "1.7",
+        "fuel/auth": "1.7",
+        "fuel/email": "1.7",
+        "fuel/oil": "1.7",
+        "fuel/orm": "1.7",
+        "fuel/parser": "1.7"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "fuel/core",
+                "type": "fuel-package",
+                "version": "1.7",
+                "require": {
+                    "composer/installers": "*"
+                },
+                "source": {
+                    "url": "https://github.com/fuel/core.git",
+                    "type": "git",
+                    "reference": "1.7/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "fuel/auth",
+                "type": "fuel-package",
+                "version": "1.7",
+                "require": {
+                    "composer/installers": "*"
+                },
+                "source": {
+                    "url": "https://github.com/fuel/auth.git",
+                    "type": "git",
+                    "reference": "1.7/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "fuel/email",
+                "type": "fuel-package",
+                "version": "1.7",
+                "require": {
+                    "composer/installers": "*"
+                },
+                "source": {
+                    "url": "https://github.com/fuel/email.git",
+                    "type": "git",
+                    "reference": "1.7/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "fuel/oil",
+                "type": "fuel-package",
+                "version": "1.7",
+                "require": {
+                    "composer/installers": "*"
+                },
+                "source": {
+                    "url": "https://github.com/fuel/oil.git",
+                    "type": "git",
+                    "reference": "1.7/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "fuel/orm",
+                "type": "fuel-package",
+                "version": "1.7",
+                "require": {
+                    "composer/installers": "*"
+                },
+                "source": {
+                    "url": "https://github.com/fuel/orm.git",
+                    "type": "git",
+                    "reference": "1.7/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "fuel/parser",
+                "type": "fuel-package",
+                "version": "1.7",
+                "require": {
+                    "composer/installers": "*"
+                },
+                "source": {
+                    "url": "https://github.com/fuel/parser.git",
+                    "type": "git",
+                    "reference": "1.7/master"
+                }
+            }
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "fuel/core/": ["fuel/core"],
+            "fuel/packages/auth": ["fuel/auth"],
+            "fuel/packages/email": ["fuel/email"],
+            "fuel/packages/oil": ["fuel/oil"],
+            "fuel/packages/orm": ["fuel/orm"],
+            "fuel/packages/parser": ["fuel/parser"]
+        }
+    },
+    "suggest": {
+        "mustache/mustache": "Allow Mustache templating with the Parser package",
+        "smarty/smarty": "Allow Smarty templating with the Parser package",
+        "twig/twig": "Allow Twig templating with the Parser package",
+        "mthaml/mthaml": "Allow Haml templating with Twig supports with the Parser package"
+    },
+    "config": {
+        "vendor-dir": "fuel/vendor"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "mkdir -p public",
+            "mkdir -p fuel/app/cache fuel/app/logs fuel/app/tmp",
+            "mkdir -p fuel/app/classes/controller fuel/app/classes/model fuel/app/classes/view",
+            "mkdir -p fuel/app/migrations fuel/app/modules fuel/app/tasks fuel/app/lang",
+            "mkdir -p fuel/app/tests fuel/app/vendor fuel/app/views",
+            "mkdir -p fuel/app/config/development fuel/app/config/production fuel/app/config/staging fuel/app/config/test",
+            "if [ ! -e public/index.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/public/index.php -o public/index.php; fi",
+            "if [ ! -e public/.htaccess ]; then curl https://raw.github.com/fuel/fuel/1.7/master/public/.htaccess -o public/.htaccess; fi",
+            "if [ ! -e fuel/app/bootstrap.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/bootstrap.php -o fuel/app/bootstrap.php; fi",
+            "if [ ! -e fuel/app/config/config.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/config.php -o fuel/app/config/config.php; fi",
+            "if [ ! -e fuel/app/config/db.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/db.php -o fuel/app/config/db.php; fi",
+            "if [ ! -e fuel/app/config/routes.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/routes.php -o fuel/app/config/routes.php; fi",
+            "if [ ! -e fuel/app/config/development/db.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/development/db.php -o fuel/app/config/development/db.php; fi",
+            "if [ ! -e fuel/app/config/production/db.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/production/db.php -o fuel/app/config/production/db.php; fi",
+            "if [ ! -e fuel/app/config/staging/db.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/staging/db.php -o fuel/app/config/staging/db.php; fi",
+            "if [ ! -e fuel/app/config/test/db.php ]; then curl https://raw.github.com/fuel/fuel/1.7/master/fuel/app/config/test/db.php -o fuel/app/config/test/db.php; fi",
+            "curl https://raw.github.com/fuel/fuel/1.7/master/oil -o oil",
+            "php oil r install"
+        ]
+    },
+    "minimum-stability": "dev"
+}
