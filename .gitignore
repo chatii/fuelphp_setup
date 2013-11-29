@@ -15,6 +15,7 @@ nbproject/
 *.sublime-project
 *.sublime-workspace
 *.lock
+composer.phar
 fuel/app/logs/*/*/*
 fuel/app/cache/*/*
 fuel/app/config/crypt.php
